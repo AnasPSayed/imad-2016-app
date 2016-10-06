@@ -5,22 +5,44 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: 'Article One - Anas P Sayed',
-    heading: 'Article One',
-    date: '6-10-2016',
-    content: `  
-        <p>
-                This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.
-            </p>
-            
+var articles = {
+     'article-One': {
+        title: 'Article One - Anas P Sayed',
+        heading: 'Article One',
+        date: '6-10-2016',
+        content: `  
             <p>
-                This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.
-            </p>
-            
-            <p>
-                This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.
-            </p>`
+                    This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.
+                </p>
+                
+                <p>
+                    This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.
+                </p>
+                
+                <p>
+                    This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.This is the content of the article one.
+                </p>`
+    },
+     'article-Two': {
+        title: 'Article Two - Anas P Sayed',
+        heading: 'Article Two',
+        date: '6-10-2016',
+        content: `
+                
+                <p>
+                    This is the content of the article Two.
+                </p>`
+    },
+     'article-Three': {
+        title: 'Article Three - Anas P Sayed',
+        heading: 'Article Three',
+        date: '6-10-2016',
+        content: ` 
+                
+                <p>
+                    This is the content of the article three.
+                </p>`
+    }
 };
 
 function createTemplate(data){
@@ -57,8 +79,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function (req,res){
-    res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req,res){
+    var articleName = reg.params.articleName;
+    res.send(createTemplate(articles(articleName)));
 })
 
 app.get('/article-two', function (req,res){
